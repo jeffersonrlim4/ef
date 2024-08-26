@@ -32,7 +32,7 @@ export function ProductList({ products }: ProductListProps) {
             {product.description.substr(0, 70)}...
           </div>
           <button className="w-max rounded-2xl ring-1 ring-cartbg text-cartbg py-2 px-4 text-xs hover:bg-cartbg hover:text-white">
-            Adicionar ao carrinho
+            Ver produto
           </button>
         </Link>
       ))}
