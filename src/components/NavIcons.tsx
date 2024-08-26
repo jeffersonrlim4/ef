@@ -8,9 +8,12 @@ import {
   RiShoppingCartLine,
 } from "react-icons/ri";
 import { CartModal } from "./CartModal";
+import { useCartStore } from "@/hooks/useCartStore";
 
 export function NavIcons() {
   const router = useRouter();
+  const { counter } = useCartStore();
+
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
@@ -43,7 +46,7 @@ export function NavIcons() {
       >
         <RiShoppingCartLine size={22} className="cursor-pointer" />
         <div className="absolute -top-4 -right-4 w-6 h-6 bg-cartbg rounded-full text-sm text-white flex items-center justify-center">
-          3
+          {counter}
         </div>
       </div>
       {isCartOpen && <CartModal />}

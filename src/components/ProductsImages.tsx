@@ -3,23 +3,18 @@
 import Image from "next/image";
 import { useState } from "react";
 
-const productImage = "https://placehold.co/72x96";
+interface ProductsImagesProps {
+  images: string[];
+}
 
-const images = [
-  { id: 1, url: productImage },
-  { id: 2, url: productImage },
-  { id: 3, url: productImage },
-  { id: 4, url: productImage },
-];
-
-export function ProductsImages() {
+export function ProductsImages({ images }: ProductsImagesProps) {
   const [index, setIndex] = useState(0);
 
   return (
     <div>
       <div className="h-[500px] relative">
         <Image
-          src={images[index].url}
+          src={images[index].replace(/^\[?"|"?\]$/g, "")}
           alt="product"
           fill
           sizes="50vw"
@@ -30,12 +25,12 @@ export function ProductsImages() {
       <div className="flex justify-between gap-4 mt-8">
         {images.map((img, i) => (
           <div
-            key={img.id}
+            key={img}
             className="w-1/4 h-32 relative gap-4 mt-8 cursor-pointer"
             onClick={() => setIndex(i)}
           >
             <Image
-              src={img.url}
+              src={img.replace(/^\[?"|"?\]$/g, "")}
               alt="product"
               fill
               sizes="30vw"

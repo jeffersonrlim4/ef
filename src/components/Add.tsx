@@ -1,8 +1,10 @@
 "use client";
 
+import { useCartStore } from "@/hooks/useCartStore";
 import { useState } from "react";
 
-export function Add() {
+export function Add({ product }: any) {
+  const { addItem: insertProduct } = useCartStore();
   const [quantity, setQuantity] = useState(1);
 
   const stock = 4;
@@ -14,6 +16,10 @@ export function Add() {
     if (type === "i" && quantity < stock) {
       setQuantity((prev) => prev + 1);
     }
+  };
+
+  const addItem = () => {
+    insertProduct({ ...product, quantity });
   };
 
   return (
@@ -40,7 +46,10 @@ export function Add() {
             Apenas <span className="text-orange-500">4 itens</span> em estoque
           </div>
         </div>
-        <button className="w-36 text-sm rounded-3xl ring-1 ring-cartbg text-cartbg py-2 px-4 hover:bg-cartbg hover:text-white disabled:cursor-not-allowed">
+        <button
+          onClick={addItem}
+          className="w-36 text-sm rounded-3xl ring-1 ring-cartbg text-cartbg py-2 px-4 hover:bg-cartbg hover:text-white disabled:cursor-not-allowed"
+        >
           Adicionar ao carrinho
         </button>
       </div>

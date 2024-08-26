@@ -1,9 +1,15 @@
+"use client";
 import { Filter } from "@/components/Filter";
 import { ProductList } from "@/components/ProductList";
+import { useProductsFilter } from "@/hooks/useProductsFilter";
 import Image from "next/image";
 const productImage1 = "https://placehold.co/600x400";
 
-export default function List() {
+export default function List({ searchParams }: { searchParams: any }) {
+  const { getProductsByCategory } = useProductsFilter({
+    categoryId: searchParams.cat,
+  });
+
   return (
     <div className="px-4 md:px-8 lg:px-16 xl:32 2xl:px-64 relative">
       <div className="hidden bg-pink-100 px-4 sm:flex justify-between h-64">
@@ -27,7 +33,9 @@ export default function List() {
       </div>
       <Filter />
       <h1 className="mt-12 text-xl font-semibold">Produtos para você</h1>
-      <ProductList />
+      {getProductsByCategory && (
+        <ProductList products={getProductsByCategory} />
+      )}
     </div>
   );
 }
